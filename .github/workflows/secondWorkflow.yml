@@ -1,0 +1,11 @@
+name: Second Workflow 
+on: push
+jobs:
+  first-job:
+    runs-on: windows latest
+    steps:
+      - name: greeting
+        run: echo"Hey"
+      - name: Welcome
+        run: echo"Welcome back" 
+      
