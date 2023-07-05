@@ -5,7 +5,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: greeting
-        run: echo"Hey"
+        run: echo "Hey"
       - name: Welcome
-        run: echo"Welcome back" 
+        run: echo "Welcome back" 
       
