@@ -4,8 +4,8 @@ jobs:
   first-job:
     runs-on: windows-latest
     steps:
-      - name: greeting
-        run: echo "Hey"
-      - name: Welcome
-        run: echo "Welcome back" 
+      - name: Get code 
+        run: echo "Commit changes in the code"
+      - name: Update 
+        run: echo "Update the code" 
       
