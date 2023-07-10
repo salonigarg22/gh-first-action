@@ -1,26 +1,16 @@
-name: Display all commits pushed to master in the last week
+name: Get contribution
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * 0'
 
 jobs:
-  build:
+  get-contribution:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Get current date
-        run: echo "Current date is ${{ github.event.repository.updated_at }}"
-
-      - name: Subtract 7 days from the current date
+      - name: Get contribution
         run: |
-          DATE=$(date -d "7 days ago" +%Y-%m-%d)
-          echo "Date 7 days ago was $DATE"
-
-      - name: Display all commits pushed to master in the last week
-        run: |
-          git log --pretty=format:\"%h %s\" --since=$DATE
+          git log --author="$GITHUB_ACTOR" --since="1 week ago" --pretty=tformat: --numstat | \
+          awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "Added lines: %s\nRemoved lines : %s\nTotal lines : %s\n",add,subs,loc }' -
