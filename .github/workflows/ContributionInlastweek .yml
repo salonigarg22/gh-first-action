@@ -1,0 +1,26 @@
+name: Display all commits pushed to master in the last week
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get current date
+        run: echo "Current date is ${{ github.event.repository.updated_at }}"
+
+      - name: Subtract 7 days from the current date
+        run: |
+          DATE=$(date -d "7 days ago" +%Y-%m-%d)
+          echo "Date 7 days ago was $DATE"
+
+      - name: Display all commits pushed to master in the last week
+        run: |
+          git log --pretty=format:\"%h %s\" --since=$DATE
